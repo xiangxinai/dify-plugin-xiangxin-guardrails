@@ -1,0 +1,61 @@
+identity:
+  name: "check_response_ctx"
+  author: "xiangxinai"
+  label:
+    en_US: "Xiangxin AI Guardrails - Check Response Contextual"
+    zh_Hans: "象信AI安全护栏-检测响应内容（上下文语意理解）"
+    pt_BR: "Xiangxin AI Guardrails - Check Response Contextual"
+description:
+  human:
+    en_US: "Detect AI response content safety based on context understanding, including content safety, value violations, and harmful content based on GB/T45654-2025 standards"
+    zh_Hans: "基于上下文语意理解检测AI响应的恶意操作、偏离主题和内容安全，基于《GB/T45654-2025 生成式人工智能服务安全基本要求》标准"
+    pt_BR: "Detect AI response content safety based on context understanding, including content safety, value violations, and harmful content based on GB/T45654-2025 standards"
+  llm: "Use this tool to analyze AI-generated responses for content safety violations, considering the original prompt context. Essential for ensuring AI responses are safe, appropriate, and comply with content policies."
+parameters:
+  - name: prompt
+    type: string
+    required: true
+    label:
+      en_US: "Original Prompt"
+      zh_Hans: 原始提示词(用于上下文语意理解)
+      pt_BR: "Original Prompt"
+    human_description:
+      en_US: "The original user prompt that generated the response"
+      zh_Hans: "生成响应的原始用户输入提示词（用于上下文语意理解）"
+      pt_BR: "The original user input prompt that generated the response"
+    llm_description: "The original prompt from user that was used to generate the response, providing context for analysis"
+    form: llm
+  - name: response
+    type: string
+    required: true
+    label:
+      en_US: "AI Response"
+      zh_Hans: "AI响应内容（上下文语意理解）"
+      pt_BR: AI Response
+    human_description:
+      en_US: "The AI-generated response content to be analyzed contextual for safety"
+      zh_Hans: "需要分析安全性的AI生成响应内容（上下文语意理解）"
+      pt_BR: "The AI-generated response content that needs to be checked for safety"
+    llm_description: "The AI-generated response content that needs to be checked for content safety, value compliance, and potential harmful content"
+    form: llm
+output_schema:
+  type: object
+  properties:
+    id:
+      type: string
+      description: "Unique identifier for the guardrails check"
+    overall_risk_level:
+      type: string
+      description: "Overall risk level: 无风险, 低风险, 中风险, 高风险"
+    suggest_action:
+      type: string
+      description: "Suggested action: 通过, 阻断, 代答"
+    suggest_answer:
+      type: string
+      description: "Suggested alternative answer if action is 代答/阻断, empty string if not applicable"
+    category:
+      type: string
+      description: "Primary risk category. 主要风险类别"
+extra:
+  python:
+    source: tools/check_response_ctx.py

@@ -1,0 +1,38 @@
+identity:
+  author: "xiangxinai"
+  name: "xiangxin-guardrails"
+  label:
+    en_US: "Xiangxin AI Guardrails - Open Source, Free, Contextual, Enterprise-grade"
+    zh_Hans: "象信AI安全护栏-开源|免费|上下文理解|企业级防护"
+    pt_BR: "Xiangxin AI Guardrails - Open Source, Free, Contextual, Enterprise-grade"
+  description:
+    en_US: "Open source and free enterprise-grade contextual AI guardrails for protecting against prompt attacks and Chinese context content safety based on OWASP TOP 10 LLM Applications and GB/T45654-2025 standards"
+    zh_Hans: "开源免费的企业级AI安全护栏，防护提示词攻击和中文内容安全，能理解上下文语意，基于OWASP TOP 10 LLM Applications和《GB/T45654-2025 生成式人工智能服务安全基本要求》标准。"
+    pt_BR: "Open source and free enterprise-grade contextual AI guardrails for protecting against prompt attacks and Chinese context content safety based on OWASP TOP 10 LLM Applications and GB/T45654-2025 standards"
+  icon: "icon.png"
+  icon_dark: "icon-dark.png"
+
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+      zh_Hans: API密钥
+      pt_BR: API Key
+    placeholder:
+      en_US: Enter your Xiangxin AI API key
+      zh_Hans: 输入你的象信AI API密钥
+      pt_BR: Enter your Xiangxin AI API key
+    help:
+      en_US: "Get your free API key from Xiangxin AI management console: https://xiangxinai.cn/platform/"
+      zh_Hans: "在象信AI管理控制台免费获取API密钥：https://xiangxinai.cn/platform/"
+      pt_BR: "Get your free API key from Xiangxin AI management console: https://xiangxinai.cn/platform/"
+    url: https://xiangxinai.cn/platform/
+
+tools:
+  - tools/check_prompt.yaml
+  - tools/check_response_ctx.yaml
+extra:
+  python:
+    source: provider/xiangxin-guardrails.py

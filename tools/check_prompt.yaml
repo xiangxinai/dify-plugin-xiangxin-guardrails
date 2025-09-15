@@ -1,0 +1,48 @@
+identity:
+  name: "check_prompt"
+  author: "xiangxinai"
+  label:
+    en_US: "Xiangxin AI Guardrails - Check Prompt"
+    zh_Hans: "象信AI安全护栏-检测用户输入"
+    pt_BR: "Xiangxin AI Guardrails - Check Prompt"
+description:
+  human:
+    en_US: "Detect user input for prompt attacks, jailbreaks, malicious operations and content safety issues based on OWASP TOP 10 LLM Applications and GB/T45654-2025 standards"
+    zh_Hans: "检测用户输入中的提示词攻击、越狱、恶意操作和内容安全问题，基于OWASP TOP 10 LLM Applications和《GB/T45654-2025 生成式人工智能服务安全基本要求》标准"
+    pt_BR: "Detect user input for prompt attacks, jailbreaks, malicious operations and content safety issues based on OWASP TOP 10 LLM Applications and GB/T45654-2025 standards"
+  llm: "Use this tool to detect security risks in user input/prompts, including prompt injection, jailbreak attempts, malicious operations, and content safety violations. This is essential for protecting LLM applications from various attack vectors."
+parameters:
+  - name: prompt
+    type: string
+    required: true
+    label:
+      en_US: "User Prompt"
+      zh_Hans: 用户输入
+      pt_BR: "User Prompt"
+    human_description:
+      en_US: "The user input prompt text to be analyzed for security risks"
+      zh_Hans: "需要分析安全风险的用户输入提示词"
+      pt_BR: "The user input prompt that needs to be checked for security risks"
+    llm_description: "The user input prompt that needs to be checked for security risks including prompt attacks, jailbreaks, malicious operations, and content safety issues"
+    form: llm
+output_schema:
+  type: object
+  properties:
+    id:
+      type: string
+      description: "Unique identifier for the guardrails check"
+    overall_risk_level:
+      type: string
+      description: "Overall risk level: 无风险, 低风险, 中风险, 高风险"
+    suggest_action:
+      type: string
+      description: "Suggested action: 通过, 阻断, 代答"
+    suggest_answer:
+      type: string
+      description: "Suggested alternative answer if action is 代答/阻断, empty string if not applicable"
+    category:
+      type: string
+      description: "Primary risk category. 主要风险类别"
+extra:
+  python:
+    source: tools/check_prompt.py
