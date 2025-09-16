@@ -4,8 +4,6 @@
 **Version:** 0.0.1  
 **Type:** tool  
 
----
-
 ## Description  
 
 ### Overview | 概述  
@@ -32,8 +30,6 @@ Xiangxin AI Guardrails focuses on:
 
 **推荐使用方式**：私有化部署 Dify 的同时，部署象信 AI 安全护栏。  
 
----
-
 ### Core Protection Capabilities | 核心防护能力  
 
 - **Prompt Attack Detection 提示词攻击检测**  
@@ -48,8 +44,6 @@ Xiangxin AI Guardrails focuses on:
 - **A.3 中风险 (Medium Risk)**: 商业违规（欺诈、非法经营）  
 - **A.4 低风险 (Low Risk)**: 权益侵害（侮辱、隐私泄露）  
 
----
-
 ### Open Source Advantages | 开源优势  
 
 - Apache 2.0 License  
@@ -60,8 +54,6 @@ Xiangxin AI Guardrails focuses on:
 **Open Source Repositories 开源地址**:  
 - Code Repository 代码仓库: [github.com/xiangxinai/xiangxin-guardrails](https://github.com/xiangxinai/xiangxin-guardrails)  
 - Model Repository 模型仓库: [huggingface.co/xiangxinai/Xiangxin-Guardrails-Text](https://huggingface.co/xiangxinai/Xiangxin-Guardrails-Text)  
-
----
 
 ### Included Tools | 插件包含的工具  
 
@@ -92,8 +84,6 @@ category:
   description: "Primary risk category. 主要风险类别"
 ```  
 
----
-
 #### 2. check_response_ctx  
 Xiangxin AI Guardrails - Check Response Contextual  
 
@@ -102,8 +92,6 @@ Xiangxin AI Guardrails - Check Response Contextual
 
 **Input 输入**: `prompt` (user input) + `response` (AI output)  
 **Output 输出格式**: Same as above (与上面一致)  
-
----
 
 ## Configure | 配置  
 
@@ -120,8 +108,6 @@ To use Xiangxin AI Guardrails, you need an **API Key**:
    ![账号管理](_assets/account.jpg)  
 3. 将 API Key 填写到 Dify 插件配置中  
 
----
-
 ## Example Usage | 使用示例  
 
 Use Xiangxin AI Guardrails’ **check_prompt** and **check_response_ctx** tools to protect the input and output of large language models.  
@@ -129,8 +115,6 @@ Use Xiangxin AI Guardrails’ **check_prompt** and **check_response_ctx** tools 
 使用象信 AI 安全护栏的 **check_prompt** 和 **check_response_ctx** 工具保护大模型的输入和输出。  
 
 ![workflow](_assets/workflow.png)  
-
----
 
 ## Issue Feedback | 问题反馈  
 
