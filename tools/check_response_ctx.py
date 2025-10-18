@@ -11,6 +11,7 @@ class CheckResponseCtxTool(Tool):
             # 获取必需参数
             prompt = tool_parameters.get("prompt", "")
             response = tool_parameters.get("response", "")
+            user_id = tool_parameters.get("user_id") if tool_parameters.get("user_id") is not None else None
 
             # 验证必需参数
             if not prompt:
@@ -29,14 +30,22 @@ class CheckResponseCtxTool(Tool):
 
             # 创建象信AI客户端并检测响应内容（基于上下文）
             client = XiangxinAI(api_key)
-            result = client.check_response_ctx(prompt=prompt, response=response)
+            result = client.check_response_ctx(prompt=prompt, response=response, user_id=user_id)
 
-            # 提取category字段：从compliance和security中不等于"无风险"的categories列表的第一项
-            category = ""
-            if result.result.compliance.risk_level != "无风险" and result.result.compliance.categories:
-                category = result.result.compliance.categories[0]
-            elif result.result.security.risk_level != "无风险" and result.result.security.categories:
-                category = result.result.security.categories[0]
+            # 提取categories字段：从compliance和security中不等于"no_risk"的categories列表的第一项
+            categories = []
+            if result.result.compliance.risk_level != "no_risk" and result.result.compliance.categories:
+                categories.append(result.result.compliance.categories[0])
+            elif result.result.security.risk_level != "no_risk" and result.result.security.categories:
+                categories.append(result.result.security.categories[0])
+            elif result.result.data.risk_level != "no_risk" and result.result.data.categories:
+                categories.append(result.result.data.categories[0])
+
+            categories_str = ", ".join(categories)
+            if categories_str:
+                categories_str = f"{categories_str}"
+            else:
+                categories_str = ""
 
             # 处理suggest_answer字段，如果不存在则设为空字符串
             suggest_answer = ""
@@ -48,7 +57,8 @@ class CheckResponseCtxTool(Tool):
             yield self.create_variable_message("overall_risk_level", result.overall_risk_level)
             yield self.create_variable_message("suggest_action", result.suggest_action)
             yield self.create_variable_message("suggest_answer", suggest_answer)
-            yield self.create_variable_message("category", category)
+            yield self.create_variable_message("categories", categories_str)
+            yield self.create_variable_message("score", result.score)
 
         except Exception as e:
             # 错误处理
